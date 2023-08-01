@@ -1,0 +1,216 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MemberMaster.master.cs" Inherits="Member_MemberMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" xml:lang="zh-CN">
+<head id="Head1" runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>    <meta name="renderer" content="webkit" title="360浏览器强制开启急速模式-webkit内核"/>
+    <meta charset="UTF-8"/>
+    <title><%=CurrentPage.SiteConfig.Title %></title>
+    <link rel="shortcut icon" href="/images/icons/favicon.ico" type="image/x-icon"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script language="javascript" type="text/javascript" src="/js/jquery-1.7.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/common.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" language="javascript">
+        gl.isLogined = 1;
+        function ChangeMenuImageSelected(name) {
+            var fullname = "#ns-" + name;
+            $(fullname).addClass("current");
+        }
+        function ChangeUserInfoMenuSelected(name) {
+            $("#user-menu ul li").removeClass("tp-ui-active");
+            $("#user-menu ul li div.tp-ui-menu-submenu").attr("style", "display:none;");
+            $("#user-menu ul li ul li").removeClass("active");
+            var fullname = $("#user-menu ul li ul li." + name);
+            fullname.addClass("active");
+            fullname.parent().parent().attr("style", "display:block;");
+            fullname.parent().parent().parent().addClass("tp-ui-active");
+        }
+    </script>
+    <asp:ContentPlaceHolder id="MemberHeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body id="bg-base">
+    <form id="form1" runat="server">
+        <div id="topbar-wrap">
+            <div class="main" id="topbar">                <div id="checker-lite">                    <!--handle start-->
+                    <div class="handle">
+                        <a href="javascript:void(0);">
+                            <span class="title">彩种选择</span> <em class="arrow">
+                                &nbsp;
+                            </em>
+                        </a>
+                    </div>
+                    <!--handle end-->                    <!--content start-->
+                    <div class="content">                        <!--list-base start-->
+                        <div class="c-list-base">
+                            <ul id="lottery-selector">                                <asp:Repeater ID="rptLotterySelector" runat="server">                                <ItemTemplate>                                    <li style="display:block" code="<%#Eval("lotteryID") %>" hash="<%#Eval("nick") %>" sticked="1">
+                                        <div class="image">
+                                            <a class="ticket-icon t-s-32 ti-<%#Eval("nick") %>" href="javascript:goLink('bet', '<%#Eval("nick") %>');"><%#Eval("title") %></a>
+                                        </div>
+                                        <div class="title">
+                                            <a href="javascript:goLink('bet', '<%#Eval("nick") %>');">
+                                                <%#Eval("title")%>
+                                                <span><%#Eval("desc") %></span>
+                                            </a> 
+                                        </div>
+                                    </li>                                    </ItemTemplate>                                </asp:Repeater>                            </ul>                        </div>        
+                        <!--list-base end-->                    </div>                    <!--content end-->                </div>                
+                <!--window-option start-->
+                <div class="operate-bar operate-bar-hor" id="window-option" style="display:none;">
+                    <ul>
+                        <li><a href="javascript:goLink('home');">返回首页</a></li>
+                    </ul>
+                </div>
+                <!--window-option end-->                                <!--user-base satrt-->                <div id="user-base" class="ub-index">
+                    <div class="image"> <a href="javascript:goLink('myinfo');"><asp:Literal ID="ltlAvatar" runat="server" Text=""></asp:Literal></a> </div>
+                    <div class="ub-sub name"> <a href="javascript:goLink('myinfo');"><asp:Literal ID="ltlLoginID" runat="server"></asp:Literal></a> <span id="ub-netstate" class="ns-2" title="网络状况：优秀"><em>优秀</em></span> </div>
+                    <div class="ub-sub score">
+                        <dl>
+                            <dt ><span>游戏分数:</span></dt>
+                            <dd><span id="uss-fs"><asp:Literal ID="ltlUserCash" runat="server"></asp:Literal><i>隐藏</i></span></dd>
+                        </dl>
+                    </div>
+                    <div class="ub-sub tp-ui-opearte" id="opeart-funds">
+                        <ul>
+                            <li id="fo-recharge"><a href="javascript:goLink('charge');">充值</a></li>
+                            <li id="fo-withdrawals"><a href="javascript:goLink('discharge');">提现</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--user-base end-->                <!--opearte-base-->
+                <div class="tp-ui-opearte" id="opeart-base">                    <ul>
+                        <li><a class="op-message" href="javascript:goLink('memo');"><em id="emMemberUnReadNews1" unreadmsgcount="0">0</em></a> </li>
+                        <li class="tp-ui-dropdown">
+                            <a class="tp-ui-dropdown-handle" href="javascript:void(0);">我的帐户</a>
+                            <div class="tp-ui-dropdown-content">
+                                <ul>
+                                    <li><a href="javascript:goLink('myinfo');">个人资料</a></li>
+                                    <li><hr /></li>
+                                    <li><a href="javascript:goLink('bethist');">彩票投注记录</a></li>
+                                    <li><a href="javascript:goLink('zhuihaolist');">追号记录</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a id="op-loginout" href="javascript:;">退出</a></li>
+                    </ul>                </div>
+                <!--opeart-end-->            </div>        </div>        <div class="header-staff" id="header-wrap" >            <div class="main" id="header">                <!--logo start-->
+                <div id="logo">
+                    <div class="image"><a href="javascript:goLink('home');" title="K彩"><i>K彩</i></a></div>
+                    <div class="belong"><span><i>快乐游戏，精彩人生</i></span></div>
+                </div>
+                <!--logo end-->                <div id="nav">
+                    <ul>
+                        <li id="ns-home" style="display:none;"> <a href="javascript:goLink('home');"> <span>首页</span>  <em class="belong">Home</em>  </a> </li>
+                        <li id="ns-lottery"> <a href="javascript:goLink('lottery');"> <span>购彩大厅</span>  <em class="belong">Lottery</em>  </a> </li>
+                        <li id="ns-gamehist"> <a href="javascript:goLink('gamehist');"> <span>游戏记录</span>  <em class="belong">GameHist</em>  </a> </li>
+                        <li id="ns-bethist"> <a href="javascript:goLink('bethist');"> <span>押注记录</span>  <em class="belong">BetHist</em>  </a> </li>
+                        <li id="ns-chart"> <a href="javascript:goLink('chart');"> <span>走势图</span>  <em class="belong">Chart</em>  </a> </li>
+                        <li id="ns-help"> <a href="javascript:goLink('help');"> <span>帮助</span>  <em class="belong">Help</em>  </a> </li>
+                        <li id="ns-online"> <a href="javascript:goLink('online');"> <span>在线客服</span>  <em class="belong">Online</em>  </a> </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>            </div>
+        </div>        <!--content-wrap start-->        <div id="content-wrap">
+            <div id="subContainerId">
+                <asp:ContentPlaceHolder id="MemberBodyContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <!--content-wrap end-->        
+        <!--footer-wrap start-->        <div id="footer-wrap">
+            <div class="main" id="footer">                <div class="row helper">                    <div class="column b-20 c-1">
+                        <div class="item">
+                            <h2><span>新手上路</span><em>&nbsp;</em></h2>
+                            <ul>
+                                <!--
+                                <li><a href="#helperregist">注册开户 </a></li>-->
+                                <li><a href="javascript:goLink('helperpk10');">游戏玩法</a></li>
+                                <li><a href="javascript:goLink('help');">常见问题</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column b-20 c-2">
+                        <div class="item">
+                            <h2><span>充提便捷</span><em>&nbsp;</em></h2>
+                            <ul>
+                                <li><a href="javascript:goLink('helperrecharge');">银行转账</a></li>
+                                <li><a href="javascript:goLink('helperrecharge');">快捷充值</a></li>
+                                <li><a href="javascript:goLink('helperpeakmoney');">提款快速</a></li>
+                            </ul>
+                        </div>
+                    </div>                    <div class="column b-20 c-3">
+                        <div class="item">
+                            <h2><span>安全保障</span><em>&nbsp;</em></h2>
+                            <ul>
+                                <li><a href="javascript:goLink('helperaccountsecurity');">账号安全</a></li>
+                                <li><a href="javascript:goLink('helperfundsecurity');">资金安全</a></li>
+                                <li><a href="javascript:goLink('helperbetsecurity');">购彩安全</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--item end-->
+                    <!--item start-->
+                    <div class="column b-20 c-4">
+                        <div class="item">
+                            <h2><span>支付方式</span><em>&nbsp;</em></h2>
+                            <ul>
+                                <li><a href="javascript:goLink('helperrecharge');">财付通充值</a></li>
+                                <li><a href="javascript:goLink('helperrecharge');">工行充值</a></li>
+                                <li><a href="javascript:goLink('helperrecharge');">第三方充值</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--item end-->
+                    <!--item start-->
+                    <div class="column b-20 c-5">
+                        <div class="item">
+                            <h2><span>快速链接</span><em>&nbsp;</em></h2>
+                            <ul>
+                                <li><a href="javascript:goLink('lottery');">购彩大厅</a></li>
+                                <li><a href="javascript:goLink('gamehist');">历史开奖</a></li>
+                                <li><a href="javascript:goLink('chart');">走势图</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <!--item end-->
+
+                    <div class="clear"></div>                </div>            </div>            <div class="copyright" style="color: white;">
+                <p>K彩线上娱乐系统&nbsp;2.1&nbsp;&nbsp;&nbsp;© 版权所有</p>
+            </div>
+            <!--copyright end-->
+
+            <!--footer-tipsy start-->
+            <div id="footer-tipsy">
+                <p>友情提示：理性购彩，热心公益，未满18周岁的未成年人禁止购彩及兑奖！</p>
+            </div>        </div>
+        <!--footer-wrap end-->
+        
+        <!--loading-page start-->
+    
+        <!--loading-page end-->
+    
+        <!--betting-ban-tips start-->
+        <div class="betting-ban-tips" data-type="betting-ban-tips">
+            <div class="bbt-title">
+                <h2>温馨提示</h2>
+                <a href="javascript:void(0);" class="close">关闭</a>
+            </div>
+            <div class="row bbt-body">
+                <div class="column bbt-b-image"> <img src="/images/status/warning.png" alt="温馨提示" /> </div>
+                <div class="column bbt-b-tips">
+                    <p id="banIssueId"></p>
+                </div>
+            </div>
+            <div class="bbt-tips"><span id="bbt-t-time">0</span>秒后自动关闭窗口</div>
+        </div>
+        <!--betting-ban-tips end-->
+        
+        <!--fixder start-->
+    
+        <!--fixder end-->
+    </form>
+</body>
+</html>

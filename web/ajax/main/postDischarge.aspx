@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="postDischarge.aspx.cs" Inherits="ajax_main_postDischarge" %>

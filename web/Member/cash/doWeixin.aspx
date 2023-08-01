@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="doWeixin.aspx.cs" Inherits="Member_cash_doWeixin" %>

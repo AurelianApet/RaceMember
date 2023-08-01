@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="RefreshHistoryData.aspx.cs" Inherits="ajax_bet_RefreshHistoryData" %>

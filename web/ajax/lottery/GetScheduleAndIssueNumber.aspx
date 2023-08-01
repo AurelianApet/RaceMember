@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetScheduleAndIssueNumber.aspx.cs" Inherits="ajax_lottery_GetScheduleAndIssueNumber" %>

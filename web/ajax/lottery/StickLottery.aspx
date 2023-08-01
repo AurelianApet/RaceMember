@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StickLottery.aspx.cs" Inherits="ajax_lottery_StickLottery" %>

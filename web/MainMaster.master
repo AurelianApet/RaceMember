@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MainMaster.master.cs" Inherits="MainMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" xml:lang="zh-CN">
+<head runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>    <meta name="renderer" content="webkit" title="360浏览器强制开启急速模式-webkit内核"/>
+    <meta charset="UTF-8"/>
+    <title><%=CurrentPage.SiteConfig.Title %></title>
+    <link rel="shortcut icon" href="/images/icons/favicon.ico" type="image/x-icon"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script language="javascript" type="text/javascript" src="/js/common.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" language="javascript">
+        gl.isLogined = 0;
+    </script>
+    <asp:ContentPlaceHolder id="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="sigin">
+    <asp:ContentPlaceHolder id="BodyContent" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>
